@@ -30,6 +30,9 @@ function draw() {
     ctx.fillStyle = 'red';
     ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize, gridSize);
 
+    ctx.fillStyle = 'red';
+    ctx.fillRect(food.i * gridSize, food.j * gridSize, gridSize, gridSize);
+
     ctx.fillStyle = 'lime';
     snake.forEach(segment => {
         ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize, gridSize);
