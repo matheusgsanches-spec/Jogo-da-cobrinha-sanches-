@@ -11,6 +11,7 @@ let dy = 0;
 let score = 0;
 let gameInterval;
 let isGameOver = false;
+let speed = 100; // intervalo inicial em ms
 
 // 1. Gera uma nova posição para a comida
 function generateFood() {
@@ -20,10 +21,11 @@ function generateFood() {
     };
 }
 
+
 // 2. Desenha a cobrinha, a comida e as linhas
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     // Desenha as linhas da grade
     drawGrid();
 
@@ -74,7 +76,15 @@ function update() {
         score++;
         scoreElement.textContent = `Pontos: ${score}`;
         generateFood();
-    } else {
+        // Aumenta a velocidade do jogo em 5ms a cada fruta (ou ajusta como quiser)
+        if (speed > 20) { // limite mínimo para não ficar impossível
+            speed -= 5;
+        }
+        // Reinicia o intervalo com a nova velocidade
+        clearInterval(gameInterval);
+        gameInterval = setInterval(gameLoop, speed);
+    }
+    else {
         snake.pop();
     }
 
